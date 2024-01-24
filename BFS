@@ -1,0 +1,37 @@
+""" What is BFS (Breadth First Search) ? """
+""" BFS, Breadth-First Search, is a vertex-based technique for finding the shortest path in the graph. It uses a Queue data structure that follows first in first out. """
+""" In BFS, one vertex is selected at a time when it is visited and marked then its adjacent are visited and stored in the queue """
+
+from queue import Queue
+adj_list = {
+
+    "a": ["b","e","g"],
+    "b": ["a","g","f","c","h"],
+    "c": ["b","h","d"],
+    "d": ["c","e"],
+    "e": ["a","d","f"],
+    "f": ["e","b"],
+    "g": ["a","b"],
+    "h": ["b","c"]
+}
+
+visited = {} # creating a dict for visited nodes
+bfs_traversal_list = [] # creating a list for traversed items
+bfs_queue = Queue() # creating a queue to append values in the list
+
+for node in adj_list:
+    visited[node] = False   # declaring every nodes as false
+
+s = "a"
+visited[s] = True
+bfs_queue.put(s)  # putting value into the first place of queue
+
+while not bfs_queue.empty(): # initiating loop untill queue is empty
+    u = bfs_queue.get()
+    bfs_traversal_list.append(u) 
+    visited[u] = True
+    for v in adj_list[u]:
+        if not visited[v]:
+            visited[v] = True 
+            bfs_queue.put(v)   
+print(bfs_traversal_list)
